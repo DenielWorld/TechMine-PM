@@ -1,0 +1,6 @@
+name: TechMine-PM
+author: DenielWorld
+main: DenielWorld\TechMinePM\Main
+api: 3.0.0
+version: 0.0.1
+description: "Good old Mekanism mod from Java, but in PocketMine this time"
