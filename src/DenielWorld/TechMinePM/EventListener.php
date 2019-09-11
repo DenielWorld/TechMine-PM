@@ -24,6 +24,10 @@ class EventListener implements Listener{
         $this->plugin = $plugin;
     }
 
+    public function onTest(PlayerInteractEvent $event){//todo remove
+        var_dump($this->plugin->getBlockManager()->getWireCount($event->getBlock()->getLevel()->getBlockAt($event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->y), $event->getBlock(), $event->getBlock()->asVector3()));
+    }
+
     public function onPlace(BlockPlaceEvent $event){
         $block = $event->getBlock();
         if($block->getId() == self::COAL_GENERATOR){

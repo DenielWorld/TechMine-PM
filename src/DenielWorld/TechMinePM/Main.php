@@ -44,4 +44,8 @@ class Main extends PluginBase{
     public function getManager(string $type = "BlockManager"){
         return new Manager($this, $type);
     }
+
+    public function getBlockManager(){
+        return new BlockManager($this);
+    }
 }
