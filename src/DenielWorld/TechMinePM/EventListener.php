@@ -17,16 +17,16 @@ class EventListener implements Listener{
 
     private $plugin;
 
-    private const COAL_GENERATOR = BlockIds::COMMAND_BLOCK;
+    //private const COAL_GENERATOR = BlockIds::COMMAND_BLOCK;
 
     public function __construct(Main $plugin)
     {
         $this->plugin = $plugin;
     }
 
-    public function onTest(PlayerInteractEvent $event){//todo remove
+    /*public function onTest(PlayerInteractEvent $event){//todo remove
         var_dump($this->plugin->getBlockManager()->getWireCount($event->getBlock()->getLevel()->getBlockAt($event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->y), $event->getBlock(), $event->getBlock()->asVector3()));
-    }
+    }*/
 
     public function onPlace(BlockPlaceEvent $event){
         $block = $event->getBlock();
@@ -43,7 +43,7 @@ class EventListener implements Listener{
 
     public function onBreak(BlockBreakEvent $event){
         $block = $event->getBlock();
-        if($block->getId() == self::COAL_GENERATOR){
+        if($block->getId() == 137){
             $machine_data = new Config($this->plugin->getDataFolder() . "machine_data.yml", Config::YAML);
             $nested_value = "machines." . $block->x . ":" . $block->y . ":" . $block->z . ":" . $block->getLevel()->getName();
             if($machine_data->exists($nested_value)){

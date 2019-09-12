@@ -3,4 +3,4 @@ author: DenielWorld
 main: DenielWorld\TechMinePM\Main
 api: 3.0.0
 version: 0.0.1
-description: "Good old Mekanism mod from Java, but in PocketMine this time"
+description: "Remake of the good old 'Mekanism' mod from MC: Java Edition, but for PMMP"

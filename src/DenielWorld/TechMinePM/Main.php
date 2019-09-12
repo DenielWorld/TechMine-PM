@@ -16,8 +16,12 @@ class Main extends PluginBase{
     public function onLoad()
     {
         $machine_data = new Config($this->getDataFolder() . "machine_data.yml", Config::YAML);
-        foreach ($machine_data->get("machines") as $machine){//I hope that a value with nested values returns an array of nested values
-            $this->getScheduler()->scheduleRepeatingTask(/*todo*/);
+        $this->getBlockManager()->init();//registers everything machine related
+        //todo load machines function
+        if(is_array($machine_data->get("machines"))){
+            foreach ($machine_data->get("machines") as $machine) {//I hope that a value with nested values returns an array of nested values
+            //$this->getScheduler()->scheduleRepeatingTask(/*todo*/);
+            }
         }
     }
 
@@ -42,9 +46,15 @@ class Main extends PluginBase{
     }
 
     public function getManager(string $type = "BlockManager"){
-        return new Manager($this, $type);
+        if("type" == "BlockManager"){
+            return new BlockManager($this);
+        }
+        else {
+            throw new InvalidArgumentException("Such manager does not exist");
+        }
     }
 
+    //todo remove such clases, as they are pointless \/
     public function getBlockManager(){
         return new BlockManager($this);
     }
