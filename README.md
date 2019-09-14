@@ -46,3 +46,23 @@ reached.
     #Managers
     
     [X] BlockManager
+    
+# Contribution
+* If you are willing to contribute, you are
+welcome to do so. There is no API documentation
+as of now, and you are welcome to make one yourself
+as well.
+
+* Make sure that whatever you are contributing is
+not in the "In the works" list. If it is, it means
+that it is already being worked on and that any
+contribution regarding it will not be accepted until it is done.
+
+# In The Works
+BlockManager
+
+Rewrite of data storing into custom tiles
+ 
+Coal generator, wire system, junction
+
+Configuration    

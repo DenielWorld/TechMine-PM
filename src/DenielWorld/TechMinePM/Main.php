@@ -4,10 +4,12 @@ namespace DenielWorld\TechMinePM;
 
 use DenielWorld\TechMinePM\managers\BlockManager;
 use DenielWorld\TechMinePM\managers\Manager;
+use DenielWorld\TechMinePM\tasks\CoalGeneratorUpdateTask;
 use http\Exception\InvalidArgumentException;
 use korado531m7\InventoryMenuAPI\InventoryMenu;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\utils\TextFormat as C;
 
 class Main extends PluginBase{
 
@@ -16,11 +18,13 @@ class Main extends PluginBase{
     public function onLoad()
     {
         $machine_data = new Config($this->getDataFolder() . "machine_data.yml", Config::YAML);
+        $cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->getBlockManager()->init();//registers everything machine related
+        //todo craft manager
         //todo load machines function
-        if(is_array($machine_data->get("machines"))){
-            foreach ($machine_data->get("machines") as $machine) {//I hope that a value with nested values returns an array of nested values
-            //$this->getScheduler()->scheduleRepeatingTask(/*todo*/);
+        foreach ($machine_data->getAll() as $machine) {//I hope that a value with nested values returns an array of nested values
+            if ($machine_data->get($machine) == "Coal Generator") {
+                $this->getScheduler()->scheduleRepeatingTask(new CoalGeneratorUpdateTask($this, $machine), $cfg->getNested("performance.coal-generator-update"));
             }
         }
     }
@@ -32,12 +36,16 @@ class Main extends PluginBase{
         @mkdir($this->getDataFolder());
         if(!file_exists("config.yml")){
             $cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-            $this->cfg = $cfg;
+            $this->cfg = $cfg;//todo move dis to onLoad
             $cfg->save();
         }
         if(!file_exists("machine_data.yml")){
             $machine_data = new Config($this->getDataFolder() . "machine_data.yml", Config::YAML);
             $machine_data->save();
+        }
+        if($this->cfg->get("data-storing") !== true){
+            $this->getServer()->getLogger()->warning("Unable to store any machine data, TechMinePM is being disabled");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
         }
     }
 
@@ -54,7 +62,7 @@ class Main extends PluginBase{
         }
     }
 
-    //todo remove such clases, as they are pointless \/
+    //todo remove such methods, as they are pointless \/
     public function getBlockManager(){
         return new BlockManager($this);
     }

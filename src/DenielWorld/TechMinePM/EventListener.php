@@ -17,7 +17,7 @@ class EventListener implements Listener{
 
     private $plugin;
 
-    //private const COAL_GENERATOR = BlockIds::COMMAND_BLOCK;
+    private const COAL_GENERATOR = BlockIds::COMMAND_BLOCK;
 
     public function __construct(Main $plugin)
     {

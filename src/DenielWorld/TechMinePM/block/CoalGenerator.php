@@ -8,7 +8,11 @@ use pocketmine\block\Block;
 use pocketmine\level\Explosion;
 use pocketmine\level\particle\SmokeParticle;
 use pocketmine\math\Vector3;
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\IntTag;
+use pocketmine\nbt\tag\StringTag;
 use pocketmine\Player;
+use pocketmine\tile\Tile;
 
 class CoalGenerator extends Solid {
 
@@ -23,9 +27,19 @@ class CoalGenerator extends Solid {
         $this->plugin = $plugin;
     }
 
+    public function getName(): string
+    {
+        return "Coal Generator";
+    }
+
     public function getHardness(): float
     {
         return 4;
+    }
+
+    public function getBreakTime(Item $item): float
+    {
+        return parent::getBreakTime($item); // TODO: Hope this works
     }
 
     public function getToolType(): int
@@ -47,7 +61,26 @@ class CoalGenerator extends Solid {
     {
         $manager = $this->plugin->getBlockManager();
         $manager->setBlockAt($blockReplace->x, $blockReplace->y, $blockReplace->z, $blockReplace->level, $blockReplace, 1);
+        $nbt = new CompoundTag("", [
+            new StringTag(Tile::TAG_ID, "Coal Generator"),
+            new IntTag(Tile::TAG_X, (int)$this->x),
+            new IntTag(Tile::TAG_Y, (int)$this->y),
+            new IntTag(Tile::TAG_Z, (int)$this->z),
+        ]);
+        $nbt->setInt("energy", 0);
+        $nbt->setInt("coal", 0);
+        new \DenielWorld\TechMinePM\tile\CoalGenerator($player->getLevel(), $nbt);
         return $this->getLevel()->setBlock($this, $this, true, true);
+    }
+
+    public function onActivate(Item $item, Player $player = null): bool
+    {
+        $tile = $player->getLevel()->getTile($this->asVector3());
+        if($tile instanceof \DenielWorld\TechMinePM\tile\CoalGenerator){
+            $player->addWindow($tile->getInventory());
+            return true;
+        }
+        return false;
     }
 
     public function getXpDropAmount(): int

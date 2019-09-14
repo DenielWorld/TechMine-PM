@@ -1,0 +1,8 @@
+#Stabilize the performance of your server through these settings
+#Lower values will affect your performance in a negative way, but will increase the speed
+#of TechMinePM's functionality. Bigger values will do the opposite.
+#Smaller values are recommended for servers with more RAM & CPU
+#In ticks (1 second = 20 ticks)
+performance:
+  #How often should the coal generator transfer energy according to connected wires?
+  coal-generator-update: 20
