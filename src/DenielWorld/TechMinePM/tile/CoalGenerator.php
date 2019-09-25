@@ -2,26 +2,20 @@
 
 namespace DenielWorld\TechMinePM\tile;
 
+use DenielWorld\TechMinePM\interfaces\Generator;
 use korado531m7\InventoryMenuAPI\inventory\HopperInventory;
-use pocketmine\tile\ContainerTrait;
 use pocketmine\inventory\InventoryHolder;
 use pocketmine\item\Item;
 use pocketmine\level\Level;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\tile\Container;
 use pocketmine\tile\Nameable;
-use pocketmine\tile\NameableTrait;
-use pocketmine\tile\Spawnable;
 
-class CoalGenerator extends Spawnable implements InventoryHolder, Container, Nameable{
+class CoalGenerator extends Generator implements InventoryHolder, Container, Nameable{
 
     private $nbt;
 
     private $inventory = null;
-
-    private $coal;
-
-    private $energy;
 
     public function __construct(Level $level, CompoundTag $nbt)
     {

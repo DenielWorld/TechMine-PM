@@ -31,13 +31,14 @@ class EventListener implements Listener{
     public function onPlace(BlockPlaceEvent $event){
         $block = $event->getBlock();
         if($block->getId() == self::COAL_GENERATOR){
-            $machine_data = new Config($this->plugin->getDataFolder() . "machine_data.yml", Config::YAML);
-            $nested_value = "machines." . $block->x . ":" . $block->y . ":" . $block->z . ":" . $block->getLevel()->getName();
-            $machine_data->setNested($nested_value, "Coal Generator");
-            $machine_data->setNested($nested_value . ".stored-energy", 0);
-            $machine_data->setNested($nested_value . ".stored-coal", 0);
-            $machine_data->setNested($nested_value . ".transfer-speed", 10);//probs wont be used for a good while but lets just pick up a spot for it for now
-            $machine_data->save();
+            //no tile creation, handled by the block class itself
+            //$machine_data = new Config($this->plugin->getDataFolder() . "machine_data.yml", Config::YAML);
+            //$nested_value = "machines." . $block->x . ":" . $block->y . ":" . $block->z . ":" . $block->getLevel()->getName();
+            //$machine_data->setNested($nested_value, "Coal Generator");
+            //$machine_data->setNested($nested_value . ".stored-energy", 0);
+            //$machine_data->setNested($nested_value . ".stored-coal", 0);
+            //$machine_data->setNested($nested_value . ".transfer-speed", 10);//probs wont be used for a good while but lets just pick up a spot for it for now
+            //$machine_data->save();
         }
     }
 

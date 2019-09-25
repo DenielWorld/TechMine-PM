@@ -32,6 +32,18 @@ class BlockManager{
         BlockFactory::registerBlock(new CoalGenerator($this->plugin), true);
     }
 
+    //todo translate to php
+    /*public function getConnected( Block $start, array &$stack = [], array &$found = []){
+        $oldStack = clone $stack; //old copy of searched stacks(for exclusion)
+        $around = $start->getAffectedBlocks(); //get around the start todo fix
+        $stack =+ $around // add new blocks to searched stacks
+        foreach($around as $blocks excluding $oldstack){//get blocks around excluding searched(so no loop forever)
+            if($block.found)$found =+ $block;//add to found if found
+            $this->getConnected($block,&$stack,&$found);
+        }
+    return $found;
+    }*/
+
     //todo make this return an array of blocks if a junction is met
     public function getConnectedWires(Block $block, Vector3 $pos) : Block{//returns where the connected wires lead lel
         $wires = [$block->getLevel()->getBlockAt($pos->x, $pos->y - 1, $pos->z),
