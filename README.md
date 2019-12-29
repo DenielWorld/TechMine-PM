@@ -1,6 +1,12 @@
 # TechMine-PM
 Remake of the good old "Mekanism" mod from MC: Java
 Edition, but for PMMP
+# WARNING
+This plugin was started in my days as a beginner developer.
+Now that I have more experience, I am planning to make a
+more organized & functional rewrite of this plugin when I
+have the time. I personally do not recommend for you to use
+any of my trash-code that you find here as of now :stuck_out_tongue: 
 # Disclaimer
 * This plugin will for sure not be the exact copy of 
 the Java edition Mekanism mod, so please do not 
