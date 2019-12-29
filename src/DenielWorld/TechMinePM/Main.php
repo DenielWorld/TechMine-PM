@@ -14,6 +14,13 @@ use pocketmine\utils\TextFormat as C;
 class Main extends PluginBase{
 
     private $cfg;
+    
+    /**
+    *
+    * @var BlockManager
+    *
+    */
+    private $blockManager;
 
     public function onLoad()
     {
@@ -47,6 +54,8 @@ class Main extends PluginBase{
             $this->getServer()->getLogger()->warning("Unable to store any machine data, TechMinePM is being disabled");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
+        
+        $this->blockManager = new BlockManager($this);
     }
 
     public function getAPI(string $plugin){//used to get other plugins APIs
@@ -55,7 +64,7 @@ class Main extends PluginBase{
 
     public function getManager(string $type = "BlockManager"){
         if("type" == "BlockManager"){
-            return new BlockManager($this);
+            return $this->blockManager;
         }
         else {
             throw new InvalidArgumentException("Such manager does not exist");
